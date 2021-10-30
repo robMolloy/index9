@@ -1,13 +1,8 @@
 {
   "name": "index9",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "@babel/eslint-parser": "^7.13.14",
     "@quasar/app": "^3.0.0",
@@ -20,5 +15,17 @@
   "dependencies": {
     "lodash": "^4.17.21"
   },
-  "description": ""
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robMolloy/index9.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/robMolloy/index9/issues"
+  },
+  "homepage": "https://github.com/robMolloy/index9#readme"
 }
