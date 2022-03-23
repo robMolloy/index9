@@ -1,18 +1,13 @@
-export class Indexer {
-  constructor(obj) {
-    this.obj = obj;
-    this.indexed = {};
-    return this;
-  }
-
-  on(key) {
-    const entries = Object.entries(this.obj);
+export const index = (obj) => {
+  const on = (key) => {
     const indexed = {};
+    const values = Object.values(obj);
 
-    entries.forEach(([, obj1]) => { (indexed[obj1[key]] = obj1); });
-    this.indexed = indexed;
+    values.forEach((obj1) => { 
+      indexed[obj1[key]] = obj1
+    });
     return indexed;
-  }
-}
+  };
 
-export const index = (obj) => new Indexer(obj);
+  return { on };
+};
