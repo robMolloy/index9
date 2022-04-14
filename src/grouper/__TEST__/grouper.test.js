@@ -1,4 +1,4 @@
-import { group, groupObjects, index } from '../../'
+import { groupArrayOfObjects, groupObjectOfObjects, index } from '../../'
 
 
 const countries = [
@@ -33,27 +33,27 @@ const countriesGroupedByContinent = {
 
 
 test('Array grouped on key with unique values - group countries on id', () => {
-  const result = group(countries).on('id')
+  const result = groupArrayOfObjects(countries).on('id')
 
   expect(result).toEqual(countriesGroupedById)
 })
 
 test('Array grouped on key with non-unique values - group countries on continent', () => {
-  const result = group(countries).on('continent')
+  const result = groupArrayOfObjects(countries).on('continent')
 
   expect(result).toEqual(countriesGroupedByContinent)
 })
 
 test('Object grouped on key with unique values - group countriesIndexedById on name', () => {
   const countriesIndexedById = index(countries).on('id')
-  const result = groupObjects(countriesIndexedById).on('name')
+  const result = groupObjectOfObjects(countriesIndexedById).on('name')
 
   expect(result).toEqual(countriesGroupedByName)
 })
 
 test('Object grouped on key with non-unique values - group countriesIndexedById on continent', () => {
   const countriesIndexedById = index(countries).on('id')
-  const result = groupObjects(countriesIndexedById).on('continent')
+  const result = groupObjectOfObjects(countriesIndexedById).on('continent')
 
   expect(result).toEqual(countriesGroupedByContinent)
 })

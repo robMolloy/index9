@@ -11,13 +11,13 @@ const objectIndexer = (objectOfObjects, key) => {
   return indexer(Object.values(objectOfObjects), key)
 }
 
-export const index = (arrayOfObjects) => ({
+export const indexArrayOfObjects = (arrayOfObjects) => ({
   on: (key) => {
     return indexer(arrayOfObjects, key)   
   }
 })
 
-export const indexObject = (objectOfObjects) => ({
+export const indexObjectOfObjects = (objectOfObjects) => ({
   on: (key) => {
     return objectIndexer(objectOfObjects, key)   
   }

@@ -17,13 +17,13 @@ const objectGrouper = (objectOfObjects, key) => {
   return grouper(Object.values(objectOfObjects), key)
 }
 
-export const group = (arrayOfObjects) => ({
+export const groupArrayOfObjects = (arrayOfObjects) => ({
   on: (key) => {
     return grouper(arrayOfObjects, key)   
   }
 })
 
-export const groupObjects = (objectOfObjects) => ({
+export const groupObjectOfObjects = (objectOfObjects) => ({
   on: (key) => {
     return objectGrouper(objectOfObjects, key)   
   }

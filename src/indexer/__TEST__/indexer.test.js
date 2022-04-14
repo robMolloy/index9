@@ -1,4 +1,4 @@
-import { index, indexObject } from '..'
+import { indexArrayOfObjects, indexObjectOfObjects } from '..'
 
 const countries = [
   { id: 'id1', name: 'america', pop: 300000000, continent: 'NA', },
@@ -28,25 +28,25 @@ const countriesIndexedOnContinent = {
 }
 
 test('Array indexed on key with unique values - index countries on id', () => {
-  const result = index(countries).on('id')
+  const result = indexArrayOfObjects(countries).on('id')
 
   expect(result).toEqual(countriesIndexedOnId)
 })
 
 test('Array indexed on key with unique values2 - index countries on name', () => {
-  const result = index(countries).on('name')
+  const result = indexArrayOfObjects(countries).on('name')
 
   expect(result).toEqual(countriesIndexedOnName)
 })
 
 test('Object indexed on key with unique values - index countriesIndexedOnId on name', () => {
-  const result = indexObject(countriesIndexedOnId).on('name')
+  const result = indexObjectOfObjects(countriesIndexedOnId).on('name')
 
   expect(result).toEqual(countriesIndexedOnName)
 })
 
 test('Array indexed on key with non-unique values - index countries on continent', () => {
-  const result = indexObject(countriesIndexedOnId).on('continent')
+  const result = indexObjectOfObjects(countriesIndexedOnId).on('continent')
 
   expect(result).toEqual(countriesIndexedOnContinent)
 })
