@@ -1,40 +1,30 @@
-export class Grouper {
-  constructor(obj) {
-    this.obj = obj
-    this.indexed = {}
-    this.orderKey = 'id'
+const grouper = (arrayOfObjects, key) => {
+  const grouped = {}
 
-    return this
-  }
+  arrayOfObjects.forEach((object) => { 
+    const newIndex = object[key]
+    grouped[newIndex] = []
+  })
+  arrayOfObjects.forEach((object) => {
+    const newIndex = object[key]
+    grouped[newIndex].push(object)
+  })
 
-  orderValuesBy(orderKey) {
-    this.orderKey = orderKey
-  }
-
-  by(key) {
-    const entries = Object.entries(this.obj)
-    const indexed = {}
-
-    entries.forEach(([, obj1]) => { (indexed[obj1[key]] = {}) })
-    entries.forEach(([id, obj1]) => {
-      indexed[obj1[key]][id] = obj1
-    })
-
-    if (this.orderKey) {
-      Object.entries(indexed).forEach(([id, obj1]) => {
-        indexed[id] = Object.values(obj1).sort(
-          (a, b) => a[this.orderKey] - b[this.orderKey],
-        )
-      })
-    }
-
-    this.indexed = indexed
-    return indexed
-  }
-
-  on(key) {
-    return this.by(key)
-  }
+  return grouped
 }
 
-export const group = (obj) => new Grouper(obj)
+const objectGrouper = (objectOfObjects, key) => {
+  return grouper(Object.values(objectOfObjects), key)
+}
+
+export const group = (arrayOfObjects) => ({
+  on: (key) => {
+    return grouper(arrayOfObjects, key)   
+  }
+})
+
+export const groupObjects = (objectOfObjects) => ({
+  on: (key) => {
+    return objectGrouper(objectOfObjects, key)   
+  }
+})
