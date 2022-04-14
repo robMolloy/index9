@@ -1,4 +1,4 @@
-import { leftJoin } from '..';
+import { populate } from '..'
 
 const customers = [
   { id: 'id1', cus_name: 'Rob Molloy' },
@@ -43,15 +43,15 @@ const customerContactsResult = [
     cus_name: 'Someone Else',
     contacts: []
   },
-];
+]
 
 
 test('join contacts to customers ', () => {
-  const customerContacts = leftJoin(contacts)
-    .to(customers)
+  const customerContacts = populate(customers)
+    .in(contacts)
     .where('con_cus_id')
     .matches('id')
-    .onAlias('contacts');
+    .onAlias('contacts')
 
-  expect(customerContacts).toEqual(customerContactsResult);
-});
+  expect(customerContacts).toEqual(customerContactsResult)
+})
