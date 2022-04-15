@@ -1,30 +1,29 @@
-import { group } from '../grouper/grouper'
+import { prefixObject, groupArrayOfObjects, prefixArrayOfObjects } from '../..'
 
-const leftJoiner = (leftRows, rightRows, leftJoinKey, rightJoinKey, rightPrefix) => {
+const leftJoiner = (leftRows, rightRows, leftJoinKey, rightJoinKey, leftPrefix, rightPrefix) => {
   const rtn = []
-  // const isRightArray = Array.isArray(rightRows)
-  const rightGrouped = group(rightRows).on(rightJoinKey)
+  const rightGrouped = groupArrayOfObjects(rightRows).on(rightJoinKey)
 
-  Object.values(leftRows).forEach((leftRow) => {
-      const leftGroupSelector = leftRow[leftJoinKey]
-      const rightGroupSelection = rightGrouped[leftGroupSelector]
-      
+  leftRows.forEach((leftRow) => {
+    const leftGroupSelector = leftRow[leftJoinKey]
+    const rightGroupSelection = rightGrouped[leftGroupSelector]
 
-      const newRows = !rightGroupSelection
-        ? [{...leftRow}]
-        : rightGroupSelection.map((rightRow) => ({...rightRow, ...leftRow}))
+    const newRows = !rightGroupSelection
+      ? [{...prefixObject(leftRow).keys.with(leftPrefix)}]
+      : prefixArrayOfObjects(rightGroupSelection).keys.with(rightPrefix)
+        .map((rightRow) => ({...rightRow, ...leftRow}))
 
-      rtn.push(...newRows)
+    rtn.push(...newRows)
   })
 
   return rtn
 }
 
 
-export const leftJoin = (rightRows, rightPrefix) => ({
-  to: (leftRows) => ({
+export const leftJoinArrayOfObjects = (rightRows, rightPrefix) => ({
+  to: (leftRows, leftPrefix) => ({
     where: (rightJoinKey) => ({
-      matches: (leftJoinKey) => leftJoiner(leftRows, rightRows, leftJoinKey, rightJoinKey, rightPrefix)
+      matches: (leftJoinKey) => leftJoiner(leftRows, rightRows, leftJoinKey, rightJoinKey, leftPrefix, rightPrefix)
     })
   })
 })
