@@ -1,54 +1,38 @@
 const prefixObjectKeys = (object, prefix) => {
-	const rtn = {}
-  console.log(object, ',', prefix)
+  const rtn = {}
 	Object.entries(object).forEach(([k, v]) => rtn[`${prefix}${k}`] = v)
-	return rtn
+  return rtn
 }
 
 const prefixObjectValues = (object, prefix) => {
-	const rtn = {}
+  const rtn = {}
 	Object.entries(object).forEach(([k, v]) => rtn[k] = `${prefix}${v}`)
-  Object.entries(object).reduce((newObject, [k,v]) => {
-    return { ...newObject, [k]: v}
-  }, {})
-	return rtn
+  return rtn
 }
 
-const prefixArrayOfObjectsKeys = (object, prefix) => {
-	const rtn = {}
-	Object.entries(object).forEach(([k, v]) => rtn[`${prefix}${k}`] = v)
-	return rtn
+const prefixArrayOfObjectsKeys = (arrayOfObjects, prefix) => {
+  return arrayOfObjects.map((object) => prefixObjectKeys(object, prefix))
 }
 
-const prefixArrayOfObjectsValues = (object, prefix) => {
-	const rtn = {}
-	Object.entries(object).forEach(([k, v]) => rtn[`${prefix}${k}`] = v)
-	return rtn
+const prefixArrayOfObjectsValues = (arrayOfObjects, prefix) => {
+  return arrayOfObjects.map((object) => prefixObjectValues(object, prefix))
 }
 
-
-
-  
-
-
-
-export const prefixObject = (obj1) => ({
-  keys: () => ({
-    with: (prefix) => {
-			console.log(obj1)
-			return prefixObjectKeys(object, prefix)
-		},
-  }),
-  values: {
-    with: (prefix) => prefixObjectValues(object, prefix),
+export const prefixObject = (object) => ({
+  keys: {
+    with: (prefix) => prefixObjectKeys(object, prefix)
   },
+  values: {
+    with: (prefix) => prefixObjectValues(object, prefix)
+  }
 })
 
 export const prefixArrayOfObjects = (arrayOfObjects) => ({
   keys: {
-    with: (prefix) => prefixArrayOfObjectsKeys(arrayOfObjects, prefix),
+    with: (prefix) => prefixArrayOfObjectsKeys(arrayOfObjects, prefix)
   },
   values: {
-    with: (prefix) => prefixArrayOfObjectsValues(arrayOfObjects, prefix),
-  },
+    with: (prefix) => prefixArrayOfObjectsValues(arrayOfObjects, prefix)
+  }
 })
+
