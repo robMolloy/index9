@@ -2,6 +2,13 @@ import { prefixObject, groupArrayOfObjects, prefixArrayOfObjects } from '../..'
 
 const leftJoiner = (leftRows, rightRows, leftJoinKey, rightJoinKey, leftPrefix, rightPrefix) => {
   const rtn = []
+
+  leftRows = prefixArrayOfObjects(leftRows).keys.with(leftPrefix)
+  rightRows = prefixArrayOfObjects(rightRows).keys.with(rightPrefix)
+
+  leftJoinKey = `${leftPrefix || ''}${leftJoinKey}`
+  rightJoinKey = `${rightPrefix || ''}${rightJoinKey}`
+
   const rightGrouped = groupArrayOfObjects(rightRows).on(rightJoinKey)
 
   leftRows.forEach((leftRow) => {
@@ -9,9 +16,8 @@ const leftJoiner = (leftRows, rightRows, leftJoinKey, rightJoinKey, leftPrefix, 
     const rightGroupSelection = rightGrouped[leftGroupSelector]
 
     const newRows = !rightGroupSelection
-      ? [{...prefixObject(leftRow).keys.with(leftPrefix)}]
-      : prefixArrayOfObjects(rightGroupSelection).keys.with(rightPrefix)
-        .map((rightRow) => ({...rightRow, ...leftRow}))
+      ? [{...leftRow}]
+      : rightGroupSelection.map((rightRow) => ({...rightRow, ...leftRow}))
 
     rtn.push(...newRows)
   })
