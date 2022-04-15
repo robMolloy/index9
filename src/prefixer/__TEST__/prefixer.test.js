@@ -26,24 +26,20 @@ const customersWithPrefixedValue = [
 
 test('prefix keys customer', () => {
   const result = prefixObject(customer).keys.with('cus_')
-
   expect(result).toEqual(customerWithPrefixedKey)
 })
 
 test('prefix values customer', () => {
   const result = prefixObject(customer).values.with('cus_')
-
   expect(result).toEqual(customerWithPrefixedValue)
 })
 
 test('prefix keys customers', () => {
   const result = prefixArrayOfObjects(customers).keys.with('cus_')
-
   expect(result).toEqual(customersWithPrefixedKey)
 })
 
 test('prefix values customers', () => {
   const result = prefixArrayOfObjects(customers).values.with('cus_')
-
   expect(result).toEqual(customersWithPrefixedValue)
 })
