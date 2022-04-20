@@ -1,4 +1,4 @@
-import { populateArrayOfObjects } from '..'
+import { combineArrayOfObjects } from '..'
 
 const customers = [
   { id: 'id1', cus_name: 'Rob Molloy' },
@@ -46,7 +46,7 @@ const customerContactsResult = [
 ]
 
 test('join contacts to customers ', () => {
-  const customerContacts = populateArrayOfObjects(customers)
+  const customerContacts = combineArrayOfObjects(customers)
     .in(contacts)
     .where('con_cus_id')
     .matches('id')

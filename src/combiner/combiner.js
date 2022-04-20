@@ -14,8 +14,7 @@ const populater = (left, right, leftJoinKey, rightJoinKey, aliasKey)=>{
   return left
 }
 
-
-export const populateArrayOfObjects = (left) => ({
+export const combineArrayOfObjects = (left) => ({
   in: (right) => ({
     where: (rightJoinKey) => ({
       matches: (leftJoinKey) => ({
