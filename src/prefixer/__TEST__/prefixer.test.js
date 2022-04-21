@@ -1,4 +1,4 @@
-import { prefixArrayOfObjects, prefixObject } from "../";
+import { prefixArrayOfObjects, prefixObject, prefix } from "../";
 
 const customer = { id: 'id1', name: 'Rob Molloy' }
 const customerWithPrefixedKey = { cus_id: 'id1', cus_name: 'Rob Molloy' }
@@ -25,6 +25,11 @@ const customersWithPrefixedValue = [
 
 test('prefix keys customer', () => {
   const result = prefixObject(customer).keys.with('cus_')
+  expect(result).toEqual(customerWithPrefixedKey)
+})
+
+test('prefix keys customer', () => {
+  const result = prefix.object(customer).keys.with('cus_')
   expect(result).toEqual(customerWithPrefixedKey)
 })
 

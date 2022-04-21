@@ -1,26 +1,4 @@
-const prefixObjectKeys = (object, prefix) => {
-  if(!prefix) return object
-  const rtn = {}
-	Object.entries(object).forEach(([k, v]) => rtn[`${prefix}${k}`] = v)
-  return rtn
-}
-
-const prefixObjectValues = (object, prefix) => {
-  if(!prefix) return object
-  const rtn = {}
-	Object.entries(object).forEach(([k, v]) => rtn[k] = `${prefix}${v}`)
-  return rtn
-}
-
-const prefixArrayOfObjectsKeys = (arrayOfObjects, prefix) => {
-  if(!prefix) return arrayOfObjects
-  return arrayOfObjects.map((object) => prefixObjectKeys(object, prefix))
-}
-
-const prefixArrayOfObjectsValues = (arrayOfObjects, prefix) => {
-  if(!prefix) return arrayOfObjects
-  return arrayOfObjects.map((object) => prefixObjectValues(object, prefix))
-}
+import { prefixObjectKeys, prefixObjectValues, prefixArrayOfObjectsKeys, prefixArrayOfObjectsValues } from './prefixerHelpers'
 
 export const prefixObject = (object) => ({
   keys: {
@@ -31,6 +9,7 @@ export const prefixObject = (object) => ({
   }
 })
 
+
 export const prefixArrayOfObjects = (arrayOfObjects) => ({
   keys: {
     with: (prefix) => prefixArrayOfObjectsKeys(arrayOfObjects, prefix)
@@ -40,3 +19,7 @@ export const prefixArrayOfObjects = (arrayOfObjects) => ({
   }
 })
 
+export const prefix = {
+  object: prefixObject,
+  objects: prefixArrayOfObjects
+}
