@@ -21,7 +21,7 @@
   },
   "scripts": {
     "test": "jest",
-    "test:watch": "cls && jest --watch",
+    "test:watch": "cls && jest --watchAll",
     "lint": "eslint ./ --fix"
   },
   "repository": {
