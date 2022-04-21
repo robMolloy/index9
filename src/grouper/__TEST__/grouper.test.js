@@ -1,4 +1,4 @@
-import { groupArrayOfObjects, groupObjectOfObjects, indexArrayOfObjects } from '../../'
+import { groupArrayOfObjects, groupObjectOfObjects, indexArrayOfObjects } from '../..'
 
 
 const countries = [

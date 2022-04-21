@@ -1,4 +1,4 @@
-import { indexArrayOfObjects, indexObjectOfObjects } from '..'
+import { indexArrayOfObjects, indexObjectOfObjects } from '../..'
 
 const countries = [
   { id: 'id1', name: 'america', pop: 300000000, continent: 'NA', },

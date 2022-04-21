@@ -1,4 +1,4 @@
-import { populateArrayOfObjects } from '..'
+import { populateArrayOfObjects } from '../..'
 
 let customers
 let contacts

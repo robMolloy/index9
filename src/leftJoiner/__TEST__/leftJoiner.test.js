@@ -1,4 +1,4 @@
-import { leftJoinArrayOfObjects } from '..'
+import { leftJoinArrayOfObjects } from '../..'
 
 const customers = [
   { id: 'id1', name: 'Rob Molloy' },

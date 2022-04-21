@@ -1,4 +1,4 @@
-import { prefixObject, indexArrayOfObjects, prefixArrayOfObjects } from '../..'
+import { indexArrayOfObjects, prefixArrayOfObjects } from '../..'
 
 const leftJoiner = (leftRows, rightRows, leftJoinKey, rightJoinKey, leftPrefix, rightPrefix) => {
   const rtn = []

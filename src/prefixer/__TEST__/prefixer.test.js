@@ -1,4 +1,4 @@
-import { prefixArrayOfObjects, prefixObject, prefix } from "../";
+import { prefixArrayOfObjects, prefixObject, prefix } from "../..";
 
 const customer = { id: 'id1', name: 'Rob Molloy' }
 const customerWithPrefixedKey = { cus_id: 'id1', cus_name: 'Rob Molloy' }

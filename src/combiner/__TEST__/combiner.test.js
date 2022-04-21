@@ -1,4 +1,4 @@
-import { combineArrayOfObjects } from '..'
+import { combineArrayOfObjects } from '../..'
 
 const customers = [
   { id: 'id1', cus_name: 'Rob Molloy' },
