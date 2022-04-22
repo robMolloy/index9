@@ -1,4 +1,4 @@
-import { indexArrayOfObjects, prefixArrayOfObjects } from '../..'
+import { indexArrayOfObjects, prefixArrayOfObjects, join } from '../..'
 
 const leftJoiner = (leftRows, rightRows, leftJoinKey, rightJoinKey, leftPrefix, rightPrefix) => {
   const rtn = []
@@ -11,17 +11,7 @@ const leftJoiner = (leftRows, rightRows, leftJoinKey, rightJoinKey, leftPrefix, 
 
   const leftIndexed = indexArrayOfObjects(leftRows).on(leftJoinKey)
 
-  rightRows.forEach((rightRow) => {
-    const rightRowSelector = rightRow[rightJoinKey]
-    const leftRowSelection = leftIndexed[rightRowSelector]
-
-    const newRow = !leftRowSelection
-      ? { ...rightRow }
-      : { ...leftRowSelection, ...rightRow }
-    rtn.push(newRow)
-  })
-
-  return rtn
+  return join(rightRows).to(leftIndexed).where(rightJoinKey).matchesIndex().ifNoMatch((row) => ({...row}))
 }
 
 

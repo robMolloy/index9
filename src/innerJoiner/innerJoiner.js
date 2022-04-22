@@ -1,4 +1,4 @@
-import { groupArrayOfObjects, prefixArrayOfObjects } from '..'
+import { groupArrayOfObjects, prefixArrayOfObjects, join } from '../..'
 
 const innerJoiner = (leftRows, rightRows, leftJoinKey, rightJoinKey, leftPrefix, rightPrefix) => {
   const rtn = []
@@ -11,18 +11,7 @@ const innerJoiner = (leftRows, rightRows, leftJoinKey, rightJoinKey, leftPrefix,
 
   const rightGrouped = groupArrayOfObjects(rightRows).on(rightJoinKey)
 
-  leftRows.forEach((leftRow) => {
-    const leftGroupSelector = leftRow[leftJoinKey]
-    const rightGroupSelection = rightGrouped[leftGroupSelector]
-
-    const newRows = !rightGroupSelection
-      ? []
-      : rightGroupSelection.map((rightRow) => ({...rightRow, ...leftRow}))
-
-    rtn.push(...newRows)
-  })
-
-  return rtn
+  return join(leftRows).to(rightGrouped).where(leftJoinKey).matchesIndex().ifNoMatch()
 }
 
 
