@@ -7,7 +7,6 @@ export const join = (arrayOfObjects1) => ({
           ifNoMatchFn = ifNoMatchFn || returnEmptyArray
           
           const rtn = []
-          if(!arrayOfObjects1) console.log(arrayOfObjects1)
           arrayOfObjects1.forEach((object1Row) => {
             const selector = object1Row[link1]
             const selection = arrayOfObjects2[selector]
